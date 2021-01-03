@@ -1,0 +1,40 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from "@angular/forms"
+import { RxwebValidators,ValidationAlphabetLocale } from '@rxweb/reactive-form-validators';
+
+@Component({
+  selector: 'app-userform',
+  templateUrl: './userform.component.html',
+  styleUrls: ['./userform.component.css']
+})
+export class UserformComponent implements OnInit {
+  countryFormGroup!: FormGroup;
+
+  constructor(
+    private formBuilder:FormBuilder
+  ) { }
+
+  ngOnInit() {
+    this.countryFormGroup = this.formBuilder.group({
+        custId:['', RxwebValidators.startsWith({value:'C_'
+      ,message:'{{0}} does not starts with `C_`'
+    })], 
+      custName:['',RxwebValidators.compose({
+        validators:[
+          RxwebValidators.maxLength({value:16
+            ,message:'{{0}} Maximum 16 characters are allowed'}),
+            RxwebValidators.alpha({message:'You can enter only alphabets.'})
+            
+        ]
+      })
+     ],
+     email:['',RxwebValidators.compose({
+       validators:[
+         RxwebValidators.email({message:'please enter a valid email'}),
+         RxwebValidators.lowerCase({message:'You can enter only lowerCase letters.' })
+       ]
+     })],
+     comwebite:['',RxwebValidators.url({message:'enter a valid url pattern '})]
+    });
+}
+}

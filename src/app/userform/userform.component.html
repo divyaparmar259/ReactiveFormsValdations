@@ -1,0 +1,54 @@
+<div>
+    <form  [formGroup]="countryFormGroup">
+      <div class="form-group">
+        <label>Customer Id</label>
+        <input type="text" formControlName="custId" class="form-control"  />
+        <small class="form-text text-muted">
+            You can enter value which starts with 'C_'<br/></small>
+       <small class="form-text text-danger"
+        *ngIf="countryFormGroup.controls.custId.errors">
+        {{countryFormGroup.controls.custId.errors.startsWith.message}}<br/></small>	
+      </div>
+
+      <div class="form-group">
+        <label>Customer Name</label>
+        <input type="text" formControlName="custName" class="form-control"  />
+       
+       <small class="form-text text-danger"
+        *ngIf="countryFormGroup.controls.custName?.errors">
+        {{countryFormGroup.controls.custName.errors?.maxLength?.message}}<br/></small>
+        
+        <small class="form-text text-danger"
+        *ngIf="countryFormGroup.controls.custName?.errors">
+        {{countryFormGroup.controls.custName.errors?.alpha?.message}}<br/></small>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="text" formControlName="email" class="form-control"  />
+       
+      <small class="form-text text-danger"
+        *ngIf="countryFormGroup.controls.email.errors">
+        {{countryFormGroup.controls.email.errors.email.message}}<br/></small>
+      
+
+        <small class="form-text text-danger" *ngIf="countryFormGroup.controls.email.errors">
+            {{countryFormGroup.controls.email.errors.lowerCase.message}}<br/></small>	
+    </div>
+
+    <div class="form-group">
+        <label>Company Website</label>
+        <input type="text" formControlName="comwebite" class="form-control"  />
+       
+      <small class="form-text text-danger"
+        *ngIf="countryFormGroup.controls.comwebite.errors">
+        {{countryFormGroup.controls.comwebite.errors.url.message}}<br/></small>
+      
+
+      
+    </div>
+
+      <button [disabled]="!countryFormGroup.valid" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  
