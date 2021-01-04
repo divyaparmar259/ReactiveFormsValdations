@@ -9,12 +9,16 @@ import { RxwebValidators,ValidationAlphabetLocale } from '@rxweb/reactive-form-v
 })
 export class UserformComponent implements OnInit {
   countryFormGroup!: FormGroup;
+  todayDate!:Date ;
 
   constructor(
     private formBuilder:FormBuilder
   ) { }
 
   ngOnInit() {
+
+    this.todayDate=new Date();
+
     this.countryFormGroup = this.formBuilder.group({
         custId:['', RxwebValidators.startsWith({value:'C_'
       ,message:'{{0}} does not starts with `C_`'
@@ -34,7 +38,18 @@ export class UserformComponent implements OnInit {
          RxwebValidators.lowerCase({message:'You can enter only lowerCase letters.' })
        ]
      })],
-     comwebite:['',RxwebValidators.url({message:'enter a valid url pattern '})]
+     comwebite:['',RxwebValidators.url({message:'enter a valid url pattern '})],
+     dob:['',RxwebValidators.compose({
+       validators:[
+         RxwebValidators.maxDate({value:this.todayDate,message:'greater than today"s date not allowed'})
+       ]
+     })],
+     pincode:['',RxwebValidators.compose({
+       validators:[
+         RxwebValidators.minLength({value:6,message:'must be six character '}),
+         RxwebValidators.maxLength({value:6})
+       ]
+     })]
     });
 }
 }

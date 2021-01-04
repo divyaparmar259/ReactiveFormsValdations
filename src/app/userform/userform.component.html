@@ -44,9 +44,38 @@
         *ngIf="countryFormGroup.controls.comwebite.errors">
         {{countryFormGroup.controls.comwebite.errors.url.message}}<br/></small>
       
-
-      
     </div>
+
+    <div class="form-group">
+      <label>Date of Birth</label>
+      <input type="text" formControlName="dob" class="form-control"  />
+     
+    <!-- <small class="form-text text-danger"
+      *ngIf="countryFormGroup.controls.dob.errors">
+      {{countryFormGroup.controls.dob.errors.date.message}}<br/></small> -->
+
+      <small class="form-text text-danger"
+      *ngIf="countryFormGroup.controls.dob.errors">
+      {{countryFormGroup.controls.dob.errors.maxDate.message}}<br/></small>
+    
+  </div>
+
+  <div class="form-group">
+    <label>Pin Code</label>
+    <input type="text" formControlName="pincode" class="form-control"  />
+
+    <small class="form-text text-muted">
+      pincode must be six character long<br/></small>
+   
+  <small class="form-text text-danger"
+    *ngIf="countryFormGroup.controls.pincode.errors">
+    {{countryFormGroup.controls.pincode.errors.minLength.message}}<br/></small>
+
+    <small class="form-text text-danger"
+    *ngIf="countryFormGroup.controls.pincode.errors">
+    {{countryFormGroup.controls.pincode.errors.maxLength.message}}<br/></small>
+  
+</div>
 
       <button [disabled]="!countryFormGroup.valid" class="btn btn-primary">Submit</button>
     </form>
